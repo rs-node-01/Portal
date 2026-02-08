@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>roguesentinel.ca</title>
+  <style>
+    :root {
+      --bg: #05070a;
+      --card: #0f121a;
+      --accent: #ff3e3e; 
+      --accent-glow: rgba(255, 62, 62, 0.3);
+      --nvg: #22c55e;    
+      --text: #f3f4f6;
+      --muted: #6b7280;
+      --radius: 12px;    
+    }
+
+    * { box-sizing: border-box; cursor: crosshair; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Courier New", Courier, monospace;
+      background:
+        radial-gradient(circle at 50% 0%, rgba(255, 62, 62, 0.08), transparent 50%),
+        var(--bg);
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 400px;
+      background: rgba(15, 18, 26, 0.8);
+      border: 1px solid rgba(255, 62, 62, 0.2);
+      border-radius: var(--radius);
+      padding: 32px 24px;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 0 40px rgba(0,0,0,0.8);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .container::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%);
+      background-size: 100% 4px;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .header { text-align: center; margin-bottom: 30px; position: relative; }
+
+    .avatar-wrapper {
+      position: relative;
+      width: 100px;
+      height: 100px;
+      margin: 0 auto 16px;
+    }
+
+    .avatar-text {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      border: 2px solid var(--accent);
+      background: linear-gradient(135deg, #1a1f2e, #05070a);
+      display: grid;
+      place-items: center;
+      font-size: 2rem;
+      font-weight: 900;
+      color: var(--text);
+      text-shadow: 0 0 10px var(--accent-glow);
+      box-shadow: 0 0 15px var(--accent-glow);
+      letter-spacing: -2px;
+    }
+
+    .status-pulse {
+      position: absolute;
+      bottom: 5px;
+      right: 5px;
+      width: 12px;
+      height: 12px;
+      background: var(--nvg);
+      border-radius: 50%;
+      border: 2px solid var(--bg);
+      box-shadow: 0 0 8px var(--nvg);
+      animation: pulse 2s infinite;
+      z-index: 3;
+    }
+
+    @keyframes pulse {
+      0% { opacity: 1; } 50% { opacity: 0.4; } 100% { opacity: 1; }
+    }
+
+    h1 { font-size: 1.2rem; margin: 0; text-transform: uppercase; letter-spacing: 0.2em; color: var(--accent); }
+    .tagline { margin-top: 8px; font-size: 0.8rem; color: var(--muted); }
+
+    .links { display: grid; gap: 12px; margin-top: 24px; }
+
+    a.link {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      padding: 14px 16px;
+      background: rgba(255, 255, 255, 0.03);
+      border-left: 3px solid var(--muted);
+      text-decoration: none;
+      color: var(--text);
+      transition: all 0.2s ease;
+      overflow: hidden;
+    }
+
+    a.link::before {
+      content: "";
+      position: absolute;
+      top: 0; left: -100%;
+      width: 50%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 62, 62, 0.1), transparent);
+      transition: none;
+    }
+
+    a.link:hover::before {
+      left: 100%;
+      transition: 0.5s;
+    }
+
+    a.link:hover {
+      background: rgba(255, 62, 62, 0.05);
+      border-left-color: var(--accent);
+      padding-left: 20px;
+    }
+
+    .link-title { font-weight: bold; font-size: 0.85rem; margin-bottom: 4px; color: var(--text); }
+    .link-meta { font-size: 0.75rem; color: var(--muted); font-style: italic; }
+
+    .footer {
+      margin-top: 32px;
+      text-align: center;
+      font-size: 0.7rem;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+      line-height: 1.6;
+    }
+    .footer span { color: var(--nvg); }
+    #timestamp { font-weight: bold; }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <header class="header">
+      <div class="avatar-wrapper">
+        <div class="avatar-text">RS</div>
+        <div class="status-pulse"></div>
+      </div>
+      <h1>ROGUE_SENTINEL</h1>
+      <div class="tagline">// encryption.active // location.redacted</div>
+    </header>
+
+    <nav class="links">
+      <a class="link" href="https://www.youtube.com/playlist?list=PLEqYobHF0_Nk50vPzBKZFdcYHMzEyhuU3" target="_blank">
+        <span class="link-title">INTEL_BRIEFING</span>
+        <span class="link-meta">NTTS archive / preventative measures</span>
+      </a>
+
+      <a class="link" href="https://haveibeenpwned.com/" target="_blank">
+        <span class="link-title">BREACH_RECON</span>
+        <span class="link-meta">check for credential exposure</span>
+      </a>
+
+      <a class="link" href="https://music.apple.com/ca/playlist/replay-2025/pl.rp-P4p4U9dw874z?ls" target="_blank">
+        <span class="link-title">AUDIO_LOGS_2025</span>
+        <span class="link-meta">apple music / replay 100</span>
+      </a>
+    </nav>
+
+    <footer class="footer">
+      <div>SYSTEM STATUS: <span>OPTIMAL</span></div>
+      <div>LAST_SYNC: <span id="timestamp"></span></div>
+      <div>© 2026 roguesentinel.ca</div>
+    </footer>
+  </main>
+
+  <script>
+    // Automatically sets the current date in YYYY-MM-DD format
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = String(now.getMonth() + 1).padStart(2, '0');
+    const day = String(now.getDate()).padStart(2, '0');
+    document.getElementById('timestamp').textContent = `${year}.${month}.${day}`;
+  </script>
+</body>
+</html>
